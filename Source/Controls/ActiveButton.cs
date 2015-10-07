@@ -122,6 +122,19 @@ namespace TheCodeKing.ActiveButtons.Controls
         }
 
         /// <summary>
+        /// 	Sets the Image property of the button control.
+        /// </summary>
+        /// <value>The text.</value>
+        public new Image Image
+        {
+            set
+            {
+                base.Image = value;
+                CalcButtonSize();
+            }
+        }
+
+        /// <summary>
         /// 	Gets or sets the background color of the control.
         /// </summary>
         /// <value></value>
@@ -232,13 +245,22 @@ namespace TheCodeKing.ActiveButtons.Controls
             base.Width = buttonSize.Width;
             base.Height = buttonSize.Height;
 
-            using (Graphics e = Graphics.FromHwnd(Handle))
-            {
-                textSize = e.MeasureString(Text, Font).ToSize();
+            if (base.Image == null)
+            { // Text button
+
+                using (Graphics e = Graphics.FromHwnd(Handle))
+                {
+                    textSize = e.MeasureString(Text, Font).ToSize();
+                }
+                if (base.Width < textSize.Width + 6)
+                {
+                    base.Width = textSize.Width + 6;
+                }
+
             }
-            if (base.Width < textSize.Width + 6)
+            else // Image button
             {
-                base.Width = textSize.Width + 6;
+                base.Width = base.Image.Width;
             }
 
             buttonX = (base.Width - textSize.Width)/2 - 1;
