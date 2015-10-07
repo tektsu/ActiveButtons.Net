@@ -29,7 +29,11 @@ namespace TheCodeKing.ActiveButtons.Controls.Themes
 
         public ITheme GetTheme()
         {
-            if (Win32.DwmIsCompositionEnabled)
+            if (Win32.version == 10)
+            {
+                return new Win10(form);
+            }
+            else if (Win32.DwmIsCompositionEnabled)
             {
                 // vista
                 return new Aero(form);
