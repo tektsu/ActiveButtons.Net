@@ -261,6 +261,7 @@ namespace TheCodeKing.ActiveButtons.Controls
             else // Image button
             {
                 base.Width = base.Image.Width;
+                base.Height = base.Image.Height;
             }
 
             buttonX = (base.Width - textSize.Width)/2 - 1;
